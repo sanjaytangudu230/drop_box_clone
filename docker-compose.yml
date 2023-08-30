@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+    environment:
+      MINIO_ACCESS_KEY: sanjay
+      MINIO_SECRET_KEY: sanjay_pass
+    volumes:
+      - /path/to/data:/data
+    command: server /data
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dropbox
+      MYSQL_USER: sanjay
+      MYSQL_PASSWORD: sanjay_pass
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
